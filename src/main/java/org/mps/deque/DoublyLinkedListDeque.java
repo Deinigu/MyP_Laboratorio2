@@ -1,5 +1,7 @@
 package org.mps.deque;
 
+import java.util.Deque;
+
 public class DoublyLinkedListDeque<T> implements DoubleEndedQueue<T> {
 
     private DequeNode<T> first;
@@ -7,44 +9,90 @@ public class DoublyLinkedListDeque<T> implements DoubleEndedQueue<T> {
     private int size;
 
     public DoublyLinkedListDeque() {
-        // TODO
+        this.first = null;
+        this.last = null;
+        size = 0;
     }
 
     @Override
     public void prepend(T value) {
-        // TODO
+        if (size() == 0) {
+            first = new DequeNode<>(value, null, last);
+            last = first;
+            size = 1;
+        } else {
+            DequeNode<T> aux = new DequeNode<>(value, null, first);
+            first = aux;
+            size++;
+        }
     }
 
     @Override
     public void append(T value) {
-        // TODO
+        if (size() == 0) {
+            last = new DequeNode<>(value, first, null);
+            first = last;
+            size = 1;
+        } else {
+            DequeNode<T> aux = new DequeNode<>(value, last, null);
+            last = aux;
+            size++;
+        }
     }
 
     @Override
     public void deleteFirst() {
-        // TODO
+        if (size <= 0) {
+            throw new DoubleEndedQueueException("No se puede borrar elementos en una lista vacía");
+        } else if (size == 1) {
+            first = null;
+            last = null;
+            size--;
+        } else {
+            DequeNode<T> temp = first;
+            first = first.getNext();
+            temp = null;
+            size--;
+        }
     }
 
     @Override
     public void deleteLast() {
-        // TODO
+
+        if (size <= 0) {
+            throw new DoubleEndedQueueException("No se puede borrar elementos en una lista vacía");
+        } else if (size == 1) {
+            first = null;
+            last = null;
+            size--;
+        } else {
+            DequeNode<T> temp = last;
+            last = last.getPrevious();
+            temp = null;
+            size--;
+        }
     }
 
     @Override
     public T first() {
-        // TODO
-        return null;
+        if(size <= 0)
+        {
+            throw new DoubleEndedQueueException("No se puede obtener el item de un nodo nulo");
+        }
+        return this.first.getItem();
     }
 
     @Override
     public T last() {
-        // TODO
-        return null;
+        if(size <= 0)
+        {
+            throw new DoubleEndedQueueException("No se puede obtener el item de un nodo nulo");
+        }
+        return this.last.getItem();
     }
 
     @Override
     public int size() {
-        // TODO
-        return 0;
+        return this.size;
     }
 }
