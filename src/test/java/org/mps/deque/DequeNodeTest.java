@@ -20,7 +20,9 @@ public class DequeNodeTest {
      *  3. Dado un nodo válido y un item válido, al establecer el valor del DequeNode con el método setItem(), el item de la instancia se actualizará.
      *  4. Dado un nodo principal, al establecer un nuevo nodo como el anterior de este, el nodo anterior se habrá actualizado correctamente.
      *  5. Dado un nodo principal, al establecer un nuevo nodo como el siguiente de este, el nodo siguiente se habrá actualizado correctamente.
-     *  6.
+     *  6. Dado un nodo que no tiene anterior, al comprobar si es el primer nodo, el método devolverá true. En caso contrario, devolverá false.
+     *  7. Dado un nodo que no tiene siguiente, al comprobar si es el último nodo, el método devolverá true. En caso contrario, devolverá false.
+     *  8. Dado un nodo que tiene anterior y siguiente, al comprobar si no es termianl, el método devolverá true. En caso contrario, devolverá false.
      *
      */
     DequeNode node;
