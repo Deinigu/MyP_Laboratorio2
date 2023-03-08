@@ -11,49 +11,45 @@ public class DoublyLinkedListDeque<T> implements DoubleEndedQueue<T> {
     public DoublyLinkedListDeque() {
         this.first = null;
         this.last = null;
-        size = 0;
+        this.size = 0;
     }
 
     @Override
     public void prepend(T value) {
-        if (size() == 0) {
-            first = new DequeNode<>(value, null, last);
-            last = first;
-            size = 1;
-        } else {
-            DequeNode<T> aux = new DequeNode<>(value, null, first);
-            first = aux;
-            size++;
+        DequeNode<T> temp = new DequeNode<T>(value,null,first);
+        if (first != null) {
+            first.setPrevious(temp);
         }
+        first = temp;
+        if(last == null) {
+            last = temp;
+        }
+        size++;
     }
 
     @Override
     public void append(T value) {
-        if (size() == 0) {
-            last = new DequeNode<>(value, first, null);
-            first = last;
-            size = 1;
-        } else {
-            DequeNode<T> aux = new DequeNode<>(value, last, null);
-            last = aux;
-            size++;
+        DequeNode<T> temp = new DequeNode<T>(value,last,null);
+        if (last != null) {
+            last.setNext(temp);
         }
+        last = temp;
+        if(first == null) {
+            first = temp;
+        }
+        size++;
     }
 
     @Override
     public void deleteFirst() {
         if (size <= 0) {
             throw new DoubleEndedQueueException("No se puede borrar elementos en una lista vacía");
-        } else if (size == 1) {
-            first = null;
-            last = null;
-            size--;
-        } else {
-            DequeNode<T> temp = first;
-            first = first.getNext();
-            temp = null;
-            size--;
         }
+        DequeNode<T> temp = first;
+        first = first.getNext();
+        first.setPrevious(null);
+        size--;
+
     }
 
     @Override
@@ -61,16 +57,11 @@ public class DoublyLinkedListDeque<T> implements DoubleEndedQueue<T> {
 
         if (size <= 0) {
             throw new DoubleEndedQueueException("No se puede borrar elementos en una lista vacía");
-        } else if (size == 1) {
-            first = null;
-            last = null;
-            size--;
-        } else {
-            DequeNode<T> temp = last;
-            last = last.getPrevious();
-            temp = null;
-            size--;
         }
+        DequeNode<T> temp = last;
+        last = first.getPrevious();
+        last.setNext(null);
+        size--;
     }
 
     @Override
