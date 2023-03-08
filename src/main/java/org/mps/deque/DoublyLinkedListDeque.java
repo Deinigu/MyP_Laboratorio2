@@ -3,6 +3,12 @@ package org.mps.deque;
 import java.util.Deque;
 
 public class DoublyLinkedListDeque<T> implements DoubleEndedQueue<T> {
+    /**
+     * Implementación de una doble lista enlazada
+     *
+     * @author Diego López Reduello
+     * @author Jaime Luis Mesa Víquez
+     */
 
     private DequeNode<T> first;
     private DequeNode<T> last;
@@ -16,6 +22,7 @@ public class DoublyLinkedListDeque<T> implements DoubleEndedQueue<T> {
 
     @Override
     public void prepend(T value) {
+        // Añade un elemento al principio de la lista
         DequeNode<T> temp = new DequeNode<T>(value,null,first);
         if (first != null) {
             first.setPrevious(temp);
@@ -29,6 +36,7 @@ public class DoublyLinkedListDeque<T> implements DoubleEndedQueue<T> {
 
     @Override
     public void append(T value) {
+        // Añade un elemento al final de la lista
         DequeNode<T> temp = new DequeNode<T>(value,last,null);
         if (last != null) {
             last.setNext(temp);
@@ -42,6 +50,7 @@ public class DoublyLinkedListDeque<T> implements DoubleEndedQueue<T> {
 
     @Override
     public void deleteFirst() {
+        // Borra el primer elemento de la lista
         if (size <= 0) {
             throw new DoubleEndedQueueException("No se puede borrar elementos en una lista vacía");
         }
@@ -54,7 +63,7 @@ public class DoublyLinkedListDeque<T> implements DoubleEndedQueue<T> {
 
     @Override
     public void deleteLast() {
-
+        // Borra el último elemento de la lista
         if (size <= 0) {
             throw new DoubleEndedQueueException("No se puede borrar elementos en una lista vacía");
         }
@@ -66,6 +75,7 @@ public class DoublyLinkedListDeque<T> implements DoubleEndedQueue<T> {
 
     @Override
     public T first() {
+        // Devuelve el primer elemento de la lista
         if(size <= 0)
         {
             throw new DoubleEndedQueueException("No se puede obtener el item de un nodo nulo");
@@ -75,6 +85,7 @@ public class DoublyLinkedListDeque<T> implements DoubleEndedQueue<T> {
 
     @Override
     public T last() {
+        // Devuelve el último elemento de la lista
         if(size <= 0)
         {
             throw new DoubleEndedQueueException("No se puede obtener el item de un nodo nulo");
@@ -84,6 +95,7 @@ public class DoublyLinkedListDeque<T> implements DoubleEndedQueue<T> {
 
     @Override
     public int size() {
+        // Devuelve el tamaño de la lista
         return this.size;
     }
 }
