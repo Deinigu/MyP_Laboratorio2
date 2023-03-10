@@ -68,7 +68,7 @@ public class DoublyLinkedListDeque<T> implements DoubleEndedQueue<T> {
             throw new DoubleEndedQueueException("No se puede borrar elementos en una lista vacía");
         }
         DequeNode<T> temp = last;
-        last = first.getPrevious();
+        last = last.getPrevious();
         last.setNext(null);
         size--;
     }
