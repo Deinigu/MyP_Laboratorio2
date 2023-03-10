@@ -3,9 +3,22 @@ package org.mps.deque;
 import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 public class DoublyLinkedListDequeTest {
     DoublyLinkedListDeque<Integer> doubleLinkedList;
+
+    /* Casos de prueba:
+     * 1. Dado un conjunto vacío de datos en una instancia de DoublyLinkedListDeque, cuando se llama al método first() o last(), entonces debe lanzarse una excepción DoubleEndedQueueException.
+     * 2. Dado un conjunto de datos en una instancia de DoublyLinkedListDeque, cuando se llama al método append() o prepend(), entonces el elemento debe agregarse correctamente a la lista doblemente enlazada.
+     * 3. Dado un conjunto de datos en una instancia de DoublyLinkedListDeque, cuando se llama al método deleteFirst() o deleteLast(), entonces el primer o último elemento debe eliminarse correctamente de la
+     * lista doblemente enlazada y el tamaño de la lista debe disminuir en uno.
+     *
+     * 4. Dado un conjunto de datos en una instancia de DoublyLinkedListDeque, cuando se llama al método first() o last(), entonces el primer o último elemento debe devolverse correctamente.
+     * 5. Dado un conjunto de datos en una instancia de DoublyLinkedListDeque, cuando se agregan varios elementos usando append() o prepend(), entonces el tamaño de la lista doblemente enlazada debe reflejar
+     *  correctamente el número de elementos agregados.
+     *
+     * 5. Dado un conjunto de datos en una instancia de DoublyLinkedListDeque, cuando se llama al método deleteFirst() o deleteLast() en una lista vacía, entonces debe lanzarse una excepción
+     *  DoubleEndedQueueException.
+     */
 
     @Nested
     @DisplayName("Constructores")
