@@ -1,5 +1,6 @@
 package org.mps.deque;
 
+import java.util.Comparator;
 import java.util.Deque;
 
 public class DoublyLinkedListDeque<T> implements DoubleEndedQueue<T> {
@@ -23,12 +24,12 @@ public class DoublyLinkedListDeque<T> implements DoubleEndedQueue<T> {
     @Override
     public void prepend(T value) {
         // Añade un elemento al principio de la lista
-        DequeNode<T> temp = new DequeNode<T>(value,null,first);
+        DequeNode<T> temp = new DequeNode<T>(value, null, first);
         if (first != null) {
             first.setPrevious(temp);
         }
         first = temp;
-        if(last == null) {
+        if (last == null) {
             last = temp;
         }
         size++;
@@ -37,12 +38,12 @@ public class DoublyLinkedListDeque<T> implements DoubleEndedQueue<T> {
     @Override
     public void append(T value) {
         // Añade un elemento al final de la lista
-        DequeNode<T> temp = new DequeNode<T>(value,last,null);
+        DequeNode<T> temp = new DequeNode<T>(value, last, null);
         if (last != null) {
             last.setNext(temp);
         }
         last = temp;
-        if(first == null) {
+        if (first == null) {
             first = temp;
         }
         size++;
@@ -76,8 +77,7 @@ public class DoublyLinkedListDeque<T> implements DoubleEndedQueue<T> {
     @Override
     public T first() {
         // Devuelve el primer elemento de la lista
-        if(size <= 0)
-        {
+        if (size <= 0) {
             throw new DoubleEndedQueueException("No se puede obtener el item de un nodo nulo");
         }
         return this.first.getItem();
@@ -86,8 +86,7 @@ public class DoublyLinkedListDeque<T> implements DoubleEndedQueue<T> {
     @Override
     public T last() {
         // Devuelve el último elemento de la lista
-        if(size <= 0)
-        {
+        if (size <= 0) {
             throw new DoubleEndedQueueException("No se puede obtener el item de un nodo nulo");
         }
         return this.last.getItem();
@@ -97,5 +96,89 @@ public class DoublyLinkedListDeque<T> implements DoubleEndedQueue<T> {
     public int size() {
         // Devuelve el tamaño de la lista
         return this.size;
+    }
+
+    @Override
+    public T get(int index) {
+        if (index < 0) {
+            throw new DoubleEndedQueueException("Indice negativo");
+        }
+        if (size() == 0) {
+            throw new DoubleEndedQueueException("No hay índices en la lista");
+        }
+        if (index > size()) {
+            throw new DoubleEndedQueueException("Índice incorrecto, por encima del tamaño");
+        }
+        boolean encontrado = false;
+        DequeNode<T> aux = this.first;
+        if (index == 0) {
+            return this.first();
+        }
+        for (int i = 1; i < size() && !encontrado; i++) {
+            aux = aux.getNext();
+            if (i == index) {
+                encontrado = true;
+            }
+        }
+
+        return aux.getItem();
+    }
+
+    @Override
+    public boolean contains(T value) {
+        DequeNode<T> aux = this.first;
+
+        if (first().equals(value)) {
+            return true;
+        }
+        for (int i = 1; i < size(); i++) {
+            aux = aux.getNext();
+            if (aux.getItem().equals(value)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public void remove(T value) {
+        DequeNode<T> aux = this.first;
+
+        if(first().equals(value))
+        {
+            deleteNode(aux);
+        }
+        for (int i = 1; i < size(); i++) {
+            aux = aux.getNext();
+            if (aux.getItem().equals(value)) {
+                deleteNode(aux);
+            }
+        }
+
+    }
+
+    private void deleteNode(DequeNode eraseThis)
+    {
+
+        if(!eraseThis.isFirstNode())
+            eraseThis.getPrevious().setNext(eraseThis.getNext());
+        else
+            this.first = eraseThis.getNext();
+        if(!eraseThis.isLastNode())
+            eraseThis.getNext().setPrevious(eraseThis.getPrevious());
+        else
+            this.last = eraseThis.getPrevious();
+        eraseThis = null;
+        size--;
+    }
+
+    @Override
+    public void sort(Comparator<? super T> comparator) {
+
+
+    }
+
+    private void swap(){
+
     }
 }

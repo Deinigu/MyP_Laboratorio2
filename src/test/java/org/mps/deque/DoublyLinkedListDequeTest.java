@@ -3,21 +3,38 @@ package org.mps.deque;
 import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 public class DoublyLinkedListDequeTest {
     DoublyLinkedListDeque<Integer> doubleLinkedList;
 
-    /* Casos de prueba:
-     * 1. Dado un conjunto vacío de datos en una instancia de DoublyLinkedListDeque, cuando se llama al método first() o last(), entonces debe lanzarse una excepción DoubleEndedQueueException.
-     * 2. Dado un conjunto de datos en una instancia de DoublyLinkedListDeque, cuando se llama al método append() o prepend(), entonces el elemento debe agregarse correctamente a la lista doblemente enlazada.
-     * 3. Dado un conjunto de datos en una instancia de DoublyLinkedListDeque, cuando se llama al método deleteFirst() o deleteLast(), entonces el primer o último elemento debe eliminarse correctamente de la
-     * lista doblemente enlazada y el tamaño de la lista debe disminuir en uno.
+    /**
+     * Esta clase contiene casos de prueba para DoublyLinkedListDeque.java
      *
-     * 4. Dado un conjunto de datos en una instancia de DoublyLinkedListDeque, cuando se llama al método first() o last(), entonces el primer o último elemento debe devolverse correctamente.
-     * 5. Dado un conjunto de datos en una instancia de DoublyLinkedListDeque, cuando se agregan varios elementos usando append() o prepend(), entonces el tamaño de la lista doblemente enlazada debe reflejar
-     *  correctamente el número de elementos agregados.
-     *
-     * 5. Dado un conjunto de datos en una instancia de DoublyLinkedListDeque, cuando se llama al método deleteFirst() o deleteLast() en una lista vacía, entonces debe lanzarse una excepción
-     *  DoubleEndedQueueException.
+     * @author Diego López Reduello
+     * @author Jaime Luis Mesa Víquez
+     */
+
+    /*  Casos de prueba:
+     *  1. Dado un conjunto vacío de datos en una instancia de DoublyLinkedListDeque, cuando se llama al método first() o last(),
+     *  entonces debe lanzarse una excepción DoubleEndedQueueException.
+     *  2. Dado un conjunto de datos en una instancia de DoublyLinkedListDeque, cuando se llama al método append() o prepend(),
+     *  entonces el elemento debe agregarse correctamente a la lista doblemente enlazada.
+     *  3. Dado un conjunto de datos en una instancia de DoublyLinkedListDeque, cuando se llama al método deleteFirst() o deleteLast(),
+     *  entonces el primer o último elemento debe eliminarse correctamente de la lista doblemente enlazada y el tamaño de la lista debe disminuir en uno.
+     *  4. Dado un conjunto de datos en una instancia de DoublyLinkedListDeque, cuando se llama al método first() o last(),
+     *  entonces el primer o último elemento debe devolverse correctamente.
+     *  5. Dado un conjunto de datos en una instancia de DoublyLinkedListDeque, cuando se agregan varios elementos usando append()
+     *  o prepend(), entonces el tamaño de la lista doblemente enlazada debe reflejar correctamente el número de elementos agregados.
+     *  6. Dado un conjunto de datos en una instancia de DoublyLinkedListDeque, cuando se llama al método deleteFirst()
+     *  o deleteLast() en una lista vacía, entonces debe lanzarse una excepción DoubleEndedQueueException.
+     *  7. Dada una DoublyLinkedListDeque con elementos válidos, cuando se llama al método get(int index) con el parámetro correcto,
+     *  devolverá el elemento que esté en la posición indicada por el parámetro (contando desde 0).
+     *  8. Dada una DoublyLinkedListDeque con elementos válidos, cuando se llama al método get(int index) con parámetros incorrectos, lanzará una excepción.
+     *  9. Dada una DoublyLinkedListDeque sin elementos, cuando se llama al método get(int index), lanzará una excepción.
+     *  10. Dada una DoublyLinkedListDeque con elementos válidos, con uno de sus nodos con un elemento x, al usar el método contains() usando como paramétro
+     *  ese objeto x, la función devolverá true. En caso contrario, devolverá false.
+     *  11. Dada una DoublyLinkedListDeque con elementos válidos, con uno de sus nodos con un elemento x, al usar el método remove() usando como paramétro
+     *  ese objeto x, la función eliminará todas las instancias de la lista con ese objeto.
      */
 
     @Nested
@@ -32,9 +49,10 @@ public class DoublyLinkedListDequeTest {
         void shutdown() {
             doubleLinkedList = null;
         }
+
         @Test
         @DisplayName("La lista tendra un tamanyo igual a 0")
-        void TestConstructor() {
+        void testConstructor() {
             doubleLinkedList = new DoublyLinkedListDeque<Integer>();
             assertEquals(0, doubleLinkedList.size());
         }
@@ -42,7 +60,7 @@ public class DoublyLinkedListDequeTest {
 
     @Nested
     @DisplayName("Funciones de clase")
-    class TestParaFuncionesDeClase {
+    class testParaFuncionesDeClase {
         @BeforeEach
         void setUp() {
             doubleLinkedList = new DoublyLinkedListDeque<Integer>();
@@ -55,7 +73,7 @@ public class DoublyLinkedListDequeTest {
 
         @Test
         @DisplayName("Append")
-        void TestAppend() {
+        void testAppend() {
             doubleLinkedList.prepend(1);
             doubleLinkedList.prepend(2);
             doubleLinkedList.prepend(3);
@@ -73,7 +91,7 @@ public class DoublyLinkedListDequeTest {
 
         @Test
         @DisplayName("Preppend")
-        void TestPreppend() {
+        void testPreppend() {
             doubleLinkedList.append(1);
             doubleLinkedList.append(2);
             doubleLinkedList.append(3);
@@ -91,7 +109,7 @@ public class DoublyLinkedListDequeTest {
 
         @Test
         @DisplayName("DeleteFirst")
-        void TestDeleteFirst() {
+        void testDeleteFirst() {
             doubleLinkedList.append(1);
             doubleLinkedList.append(2);
             doubleLinkedList.append(3);
@@ -109,7 +127,7 @@ public class DoublyLinkedListDequeTest {
 
         @Test
         @DisplayName("DeleteLast")
-        void TestDeleteLast() {
+        void testDeleteLast() {
             doubleLinkedList.append(1);
             doubleLinkedList.append(2);
             doubleLinkedList.append(3);
@@ -127,7 +145,7 @@ public class DoublyLinkedListDequeTest {
 
         @Test
         @DisplayName("Last")
-        void TestLast() {
+        void testLast() {
             assertThrows(DoubleEndedQueueException.class, () -> doubleLinkedList.last());
 
             doubleLinkedList.append(1);
@@ -165,5 +183,124 @@ public class DoublyLinkedListDequeTest {
             assertThrows(DoubleEndedQueueException.class, () -> doubleLinkedList.deleteFirst());
             assertThrows(DoubleEndedQueueException.class, () -> doubleLinkedList.deleteLast());
         }
+
+    }
+
+    @Nested
+    @DisplayName("Operaciones complejas")
+    class TestOperaciones {
+
+        @BeforeEach
+        void setUp() {
+            doubleLinkedList = new DoublyLinkedListDeque<Integer>();
+        }
+
+        @AfterEach
+        void shutdown() {
+            doubleLinkedList = null;
+        }
+
+        @Test
+        @DisplayName("get()")
+        void testGet() {
+            doubleLinkedList.append(0);
+            doubleLinkedList.append(1);
+            doubleLinkedList.append(2);
+            doubleLinkedList.append(3);
+            doubleLinkedList.append(4);
+
+            int expected = 3;
+            int actual = doubleLinkedList.get(3);
+
+            assertEquals(expected, actual);
+
+            expected = 0;
+            actual = doubleLinkedList.get(0);
+
+            assertEquals(expected, actual);
+
+            expected = 4;
+            actual = doubleLinkedList.get(4);
+            assertEquals(expected, actual);
+
+        }
+
+        @DisplayName("get() excepciones")
+        @Test
+        void testGetConExcepciones() {
+            // Caso doubleLinkedList vacía
+            assertThrows(DoubleEndedQueueException.class, () -> doubleLinkedList.get(3));
+
+            // Caso índice por encima del tamaño
+            doubleLinkedList.append(0);
+            assertThrows(DoubleEndedQueueException.class, () -> doubleLinkedList.get(3));
+
+            // Caso índice negativo
+            assertThrows(DoubleEndedQueueException.class, () -> doubleLinkedList.get(-3));
+
+        }
+
+        @DisplayName("contains()")
+        @Test
+        void testContains() {
+            doubleLinkedList.append(1);
+            doubleLinkedList.append(0);
+            doubleLinkedList.append(22);
+            doubleLinkedList.append(13);
+
+            boolean actual = doubleLinkedList.contains(0);
+            assertTrue(actual);
+
+            actual = doubleLinkedList.contains(1);
+            assertTrue(actual);
+
+            actual = doubleLinkedList.contains(13);
+            assertTrue(actual);
+
+            actual = doubleLinkedList.contains(22);
+            assertTrue(actual);
+
+            actual = doubleLinkedList.contains(420);
+            assertFalse(actual);
+
+        }
+
+        @DisplayName("remove()")
+        @Test
+        void testRemove()
+        {
+            doubleLinkedList.append(1);
+            doubleLinkedList.append(0);
+            doubleLinkedList.append(22);
+            doubleLinkedList.append(13);
+            doubleLinkedList.append(22);
+            doubleLinkedList.append(37);
+
+            // Caso eliminar el primero
+            doubleLinkedList.remove(1);
+            assertFalse(doubleLinkedList.contains(1));
+            assertTrue(doubleLinkedList.contains(0));
+
+            // Caso eliminar solo un elemento
+            doubleLinkedList.prepend(1);
+            doubleLinkedList.remove(13);
+            assertFalse(doubleLinkedList.contains(13));
+            assertTrue(doubleLinkedList.contains(22));
+
+            // Caso eliminar dos elementos
+            doubleLinkedList.append(13);
+            doubleLinkedList.remove(22);
+            assertFalse(doubleLinkedList.contains(22));
+            assertTrue(doubleLinkedList.contains(13));
+
+            // Caso eliminar último elemento
+            doubleLinkedList.remove(13);
+            assertFalse(doubleLinkedList.contains(13));
+            assertFalse(doubleLinkedList.contains(22));
+            assertTrue(doubleLinkedList.contains(1));
+
+        }
+
+
     }
 }
